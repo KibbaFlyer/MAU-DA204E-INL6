@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ToDo.Model
 {
+    /// <summary>
+    /// An Enumerator of PriorityTypes
+    /// </summary>
     public enum PriorityType
     {
         Very_important,
@@ -14,6 +17,9 @@ namespace ToDo.Model
         Less_important,
         Not_important
     }
+    /// <summary>
+    /// Makes the enumerator readable and displayfriendly, to use in dropdowns
+    /// </summary>
     public class PriorityListDisplayFriendly
     {
         public string DisplayName { get; set; }

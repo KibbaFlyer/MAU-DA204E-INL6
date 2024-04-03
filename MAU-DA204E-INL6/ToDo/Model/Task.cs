@@ -2,72 +2,48 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace ToDo.Model
 {
+    /// <summary>
+    /// A Task, used in a ObservableCollection for the main purpose of the ToDo application
+    /// </summary>
     public class Task
     {
         private DateTime _dateTime;
         private string _description;
-        private PriorityType _priority;
-        public Task(DateTime dateTime, string description, PriorityType priorityType) 
-        { 
-            _dateTime = dateTime;
-            _description = description;
-            _priority = priorityType;
-        }
-        public string Date 
+        private PriorityType? _priority;
+        // JSON Properties are here used in order to be able to serialize and deserialize it into a JSON file
+        // The DateAsString and HourAsString is used in order to make the datetime more friendly for the user
+        [JsonPropertyName("DateAsString")]
+        public string DateAsString 
         {
             get { return _dateTime.ToString("D"); }
         }
-        public string Hour
+        [JsonPropertyName("HourAsString")]
+        public string HourAsString
         {
             get { return _dateTime.ToString("HH:mm"); }
         }
-        public string Priority
+        [JsonPropertyName("Date")]
+        public DateTime Date
         {
-            get { return _priority.ToString(); }
+            get { return _dateTime; }
+            set { _dateTime = value; }
         }
+        [JsonPropertyName("Priority")]
+        public PriorityType? Priority
+        {
+            get { return _priority; }
+            set { _priority = value; }
+        }
+        [JsonPropertyName("Description")]
         public string Description
         {
             get { return _description; }
-        }
-        public bool SetDate(DateTime date)
-        {
-            try
-            {
-                _dateTime = date;
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-        public bool SetDescription(string description)
-        {
-            try
-            {
-                _description = description;
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-        public bool SetPriority(PriorityType priority)
-        {
-            try
-            {
-                _priority = priority;
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            set { _description = value; }
         }
     }
 }

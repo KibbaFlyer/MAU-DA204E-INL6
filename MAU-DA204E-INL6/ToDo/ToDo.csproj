@@ -9,11 +9,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="VIew\" />
+    <None Remove="Resources\icons8-erinnerung-16.png" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\icons8-erinnerung-16.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>
