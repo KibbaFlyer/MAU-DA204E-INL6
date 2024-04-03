@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using Microsoft.VisualBasic;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -8,6 +9,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ToDo.Model;
+using ToDo.ViewModel;
 
 namespace ToDo
 {
@@ -18,6 +21,7 @@ namespace ToDo
     {
         public MainWindow()
         {
+            DataContext = new TaskManager("ToDo Reminder by Kristoffer Flygare");
             InitializeComponent();
         }
     }

@@ -3,10 +3,53 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:ToDo"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        xmlns:viewmodel="clr-namespace:ToDo.ViewModel"
+        d:DataContext="{d:DesignInstance Type=viewmodel:TaskManager}"
+        Title="{Binding WindowName}" Height="450" Width="800"
+        Background="LightGray">
+    <Grid Margin="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height ="Auto"/>
+            <RowDefinition Height ="Auto"/>
+            <RowDefinition Height ="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height ="Auto"/>
+        </Grid.RowDefinitions>
+        <Label Content="Date and time"/>
+        <xctk:DateTimePicker Grid.Column="1" MinWidth="200" Text="{Binding CurrentDateTime}" />
+        <Label Content="To do" Grid.Row="1"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding CurrentDescription}"/>
+        <Label Content="Priority" Grid.Column="2" />
+        <ComboBox Grid.Row="0" Grid.Column="3" VerticalAlignment="Center" 
+                          ItemsSource="{Binding PriorityListDisplayFriendly, UpdateSourceTrigger=PropertyChanged}" 
+                          SelectedValue="{Binding CurrentPriority}"
+                          SelectedValuePath="Value"
+                          DisplayMemberPath="DisplayName"
+                          >
+        </ComboBox>
+        <Button Content="Add" Grid.Row="2" Grid.Column="1" Margin="5" Command="{Binding AddCommand}"/>
+        <GroupBox Header="To Do" Grid.Row="3" Grid.ColumnSpan="4">
+            <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" ItemsSource="{Binding Tasks}" SelectedItem="{Binding SelectedTask}" Margin="5">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="*"/>
+                    <DataGridTextColumn Header="Hour" Binding="{Binding Hour}" Width="*"/>
+                    <DataGridTextColumn Header="Priority" Binding="{Binding Priority}" Width="*"/>
+                    <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="2*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+        <Button Content="Change" Grid.Row="4" Grid.Column="0" Margin="5" Command="{Binding ChangeCommand}"/>
+        <Button Content="Delete" Grid.Row="4" Grid.Column="1" Margin="5" Command="{Binding DeleteCommand}"/>
+        <Label Grid.Row="4" Grid.Column="3" HorizontalAlignment="Right" Content="{Binding Time}"/>
 
     </Grid>
 </Window>
