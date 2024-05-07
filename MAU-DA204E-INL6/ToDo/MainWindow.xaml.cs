@@ -59,7 +59,9 @@ namespace ToDo
             Assembly assembly = Assembly.GetExecutingAssembly();
             AssemblyDescriptionAttribute descriptionAttribute = assembly.GetCustomAttribute<AssemblyDescriptionAttribute>();
             string assemblyDescription = descriptionAttribute != null ? descriptionAttribute.Description : "No Description Found";
-            MessageBox.Show(assemblyDescription, "Assembly Description");
+            About viewModel = new About("Assembly Description", assemblyDescription, "pack://application:,,,/Resources/thumbsup.jpg");
+            AboutPopup view = new AboutPopup(viewModel, "pack://application:,,,/Resources/icons8-erinnerung-16.png");
+            view.Show();
         }
     }
 }
